@@ -19,13 +19,20 @@ class MainScreenViewController: UIViewController {
         self.getListData()
         self.setupTableView()
         self.setupRefreshControl()
-        
+   
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        if !Connectivity.isConnectedToInternet {
+               let refreshAlert = UIAlertController(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", preferredStyle: UIAlertController.Style.alert)
+                          refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                          }))
+                          present(refreshAlert, animated: true, completion: nil)
+           }
         self.refresh()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -49,7 +56,7 @@ class MainScreenViewController: UIViewController {
 extension MainScreenViewController {
     func getListData() {
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-            GetData.shared.getListData(page: self.page){ result, error in
+            GetData.shared.getListAlbum(page: self.page){ result, error in
                 if error != nil {
                     
                 }else{
@@ -77,6 +84,7 @@ extension MainScreenViewController {
         }
         
     }
+    
 }
 extension MainScreenViewController :  UITableViewDelegate, UITableViewDataSource {
     func setupTableView(){
@@ -98,20 +106,19 @@ extension MainScreenViewController :  UITableViewDelegate, UITableViewDataSource
     
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-         if data.count == 20 * page {
-             let lastElement = data.count - 1
-             if lastElement == indexPath.row {
-                 self.page += 1
-                 self.getListData()
-             }
-         }
-     }
+        if data.count == 20 * page {
+            let lastElement = data.count - 1
+            if lastElement == indexPath.row {
+                self.page += 1
+                self.getListData()
+            }
+        }
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //        selectedOffersIndex = indexPath.row
-        //        let vc = ScreenFiveViewController()
-        //        vc.indexSet = selectedOffersIndex
-        //        self.navigationController?.pushViewController(vc, animated: false)
+        let vc = PhotosViewController()
+        self.navigationController?.pushViewController(vc, animated: false)
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 220

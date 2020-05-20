@@ -60,6 +60,6 @@ class Service: Any {
     }
     
     func getErrMessage(msg: String) -> String {
-        return msg ?? ""
+        return msg
     }
 }

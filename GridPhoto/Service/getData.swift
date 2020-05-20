@@ -11,10 +11,17 @@ import Foundation
 class GetData: Service {
     static let shared =  GetData()
     
-    func getListData(page : Int, completion: @escaping (Data?, Error?) -> Void) {
+    func getListAlbum(page : Int, completion: @escaping (Data?, Error?) -> Void) {
         let url = baseApiUrl + "albums?page=\(page)"
         get(url) { (result, error) in
             completion(result, error)
         }
     }
+    
+    func getListPhoto(page : Int, completion: @escaping (Data?, Error?) -> Void) {
+          let url = baseApiUrl + "photos?page=\(page)"
+          get(url) { (result, error) in
+              completion(result, error)
+          }
+      }
 }
