@@ -10,9 +10,15 @@ import UIKit
 
 class AlbumsCollectionViewCell: UICollectionViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
+     @IBOutlet weak var MainView: UIView!
+      @IBOutlet weak var thumbnail: UIImageView!
+      @IBOutlet weak var nameLbl: UILabel!
+      override func awakeFromNib() {
+          super.awakeFromNib()
+          // Initialization code
+         
+      }
+      class func nib() -> UINib {
+          return UINib(nibName: "AlbumsCollectionViewCell", bundle: nil)
+      }
 }

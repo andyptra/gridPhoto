@@ -7,17 +7,46 @@
 //
 
 import UIKit
-
+import SDWebImage
 class MainScreenViewController: UIViewController {
     var page = 1
-     var data : [Result] = []
+    var dataImage: DummyData = DummyData()
+    @IBOutlet weak var tableView: UITableView!
+    var data : [Result] = []
+    let refreshControl = UIRefreshControl()
     override func viewDidLoad() {
         super.viewDidLoad()
-        getListData()
-        // Do any additional setup after loading the view.
+        self.getListData()
+        self.setupTableView()
+        self.setupRefreshControl()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+        self.refresh()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    @objc func refresh() {
+        self.page = 1
+        self.data.removeAll()
+        self.tableView.reloadData()
+        self.getListData()
+    }
+    func setupRefreshControl(){
+        self.refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+        self.tableView.addSubview(refreshControl)
     }
     
     
+}
+extension MainScreenViewController {
     func getListData() {
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
             GetData.shared.getListData(page: self.page){ result, error in
@@ -35,8 +64,8 @@ class MainScreenViewController: UIViewController {
                             self.data.append(contentsOf: data)
                         }
                         DispatchQueue.main.async{
-//                            print(self.data)
-                            print("https://picsum.photos/300/200?random=2")
+                            self.tableView.reloadData()
+                            self.refreshControl.endRefreshing()
                         }
                         
                         
@@ -48,5 +77,57 @@ class MainScreenViewController: UIViewController {
         }
         
     }
-    
 }
+extension MainScreenViewController :  UITableViewDelegate, UITableViewDataSource {
+    func setupTableView(){
+        tableView.register(AlbumsTableViewCell.nib(), forCellReuseIdentifier: "cell")
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.reloadData()
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)
+        -> Int {
+            return data.count
+    }
+    
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+         if data.count == 20 * page {
+             let lastElement = data.count - 1
+             if lastElement == indexPath.row {
+                 self.page += 1
+                 self.getListData()
+             }
+         }
+     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //        selectedOffersIndex = indexPath.row
+        //        let vc = ScreenFiveViewController()
+        //        vc.indexSet = selectedOffersIndex
+        //        self.navigationController?.pushViewController(vc, animated: false)
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 220
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
+        -> UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as! AlbumsTableViewCell
+            let random  = Int.random(in: 1..<26)
+            if let url = URL(string: (dataImage.results[random]) as! String) {
+                cell.imageThumb.sd_setImage(with: url, completed: nil)
+            }
+            cell.lblTitle.text = "\(data[indexPath.row].title)"
+            cell.selectionStyle = .none
+            return cell
+    }
+}
+
+
