@@ -129,7 +129,7 @@ extension MainScreenViewController :  UITableViewDelegate, UITableViewDataSource
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as! AlbumsTableViewCell
             let random  = Int.random(in: 1..<26)
             if let url = URL(string: (dataImage.results[random]) as! String) {
-                cell.imageThumb.sd_setImage(with: url, completed: nil)
+                cell.imageThumb.sd_setImage(with: url, placeholderImage: UIImage(named: "default_photo"), completed: nil)
             }
             cell.lblTitle.text = "\(data[indexPath.row].title)"
             cell.selectionStyle = .none
