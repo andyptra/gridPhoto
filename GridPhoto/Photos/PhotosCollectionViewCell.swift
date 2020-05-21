@@ -13,16 +13,8 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var lblTitle: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupUI()
+         imageThumb.borderImage(radius:5.0)
         // Initialization code
-    }
-    
-    func setupUI() {
-        
-        imageThumb.layer.cornerRadius = 5.0
-        imageThumb.clipsToBounds = true
-        imageThumb.contentMode = .scaleAspectFill
-        imageThumb.translatesAutoresizingMaskIntoConstraints = false
     }
     class func nib() -> UINib {
         return UINib(nibName: "PhotosCollectionViewCell", bundle: nil)

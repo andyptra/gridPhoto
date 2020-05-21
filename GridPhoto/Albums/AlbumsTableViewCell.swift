@@ -14,21 +14,12 @@ class AlbumsTableViewCell: UITableViewCell {
     @IBOutlet weak var mainView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupUI()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
+        imageThumb.borderImage(radius:5.0)
         // Configure the view for the selected state
-    }
-    
-    func setupUI() {
-        
-        imageThumb.layer.cornerRadius = 5.0
-        imageThumb.clipsToBounds = true
-        imageThumb.contentMode = .scaleAspectFill
-        imageThumb.translatesAutoresizingMaskIntoConstraints = false
     }
     class func nib() -> UINib {
         return UINib(nibName: "AlbumsTableViewCell", bundle: nil)

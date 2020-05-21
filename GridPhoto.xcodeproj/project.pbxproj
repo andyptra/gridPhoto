@@ -18,6 +18,8 @@
 		0466BAD924758BFA002308F0 /* PhotosCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0466BAD724758BFA002308F0 /* PhotosCollectionViewCell.xib */; };
 		0466BADB24759268002308F0 /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466BADA24759268002308F0 /* PhotoModel.swift */; };
 		0466BADD24759ADF002308F0 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466BADC24759ADF002308F0 /* Reachability.swift */; };
+		04706CD824760E6D0071CE47 /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04706CD724760E6D0071CE47 /* UIImageView+Ext.swift */; };
+		04706CDA2476107A0071CE47 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04706CD92476107A0071CE47 /* UIViewController+Ext.swift */; };
 		0489CDBE2475556E00D3A12F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0489CDBD2475556E00D3A12F /* AppDelegate.swift */; };
 		0489CDC02475556E00D3A12F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0489CDBF2475556E00D3A12F /* SceneDelegate.swift */; };
 		0489CDC72475557400D3A12F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0489CDC62475557400D3A12F /* Assets.xcassets */; };
@@ -61,6 +63,8 @@
 		0466BAD724758BFA002308F0 /* PhotosCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotosCollectionViewCell.xib; sourceTree = "<group>"; };
 		0466BADA24759268002308F0 /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
 		0466BADC24759ADF002308F0 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		04706CD724760E6D0071CE47 /* UIImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
+		04706CD92476107A0071CE47 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		0489CDBA2475556E00D3A12F /* GridPhoto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GridPhoto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0489CDBD2475556E00D3A12F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0489CDBF2475556E00D3A12F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -137,6 +141,15 @@
 			path = Photos;
 			sourceTree = "<group>";
 		};
+		04706CD624760DF50071CE47 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				04706CD724760E6D0071CE47 /* UIImageView+Ext.swift */,
+				04706CD92476107A0071CE47 /* UIViewController+Ext.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		0489CDB12475556E00D3A12F = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +175,7 @@
 		0489CDBC2475556E00D3A12F /* GridPhoto */ = {
 			isa = PBXGroup;
 			children = (
+				04706CD624760DF50071CE47 /* Extension */,
 				0466BAD124758B9C002308F0 /* Photos */,
 				0466BAC624756808002308F0 /* Albums */,
 				0489CDF424755E7400D3A12F /* Model */,
@@ -480,12 +494,14 @@
 			files = (
 				0466BAD424758BBC002308F0 /* PhotosViewController.swift in Sources */,
 				0466BAD824758BFA002308F0 /* PhotosCollectionViewCell.swift in Sources */,
+				04706CDA2476107A0071CE47 /* UIViewController+Ext.swift in Sources */,
 				0466BADD24759ADF002308F0 /* Reachability.swift in Sources */,
 				0466BAC5247561C3002308F0 /* getData.swift in Sources */,
 				0489CDBE2475556E00D3A12F /* AppDelegate.swift in Sources */,
 				0466BAD02475824C002308F0 /* dummy.swift in Sources */,
 				0466BAC324755EE0002308F0 /* AlbumModel.swift in Sources */,
 				0466BACD24756F2A002308F0 /* AlbumsTableViewCell.swift in Sources */,
+				04706CD824760E6D0071CE47 /* UIImageView+Ext.swift in Sources */,
 				0489CDF3247558CB00D3A12F /* service.swift in Sources */,
 				0466BADB24759268002308F0 /* PhotoModel.swift in Sources */,
 				0489CDC02475556E00D3A12F /* SceneDelegate.swift in Sources */,

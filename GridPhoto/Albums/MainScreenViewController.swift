@@ -19,18 +19,16 @@ class MainScreenViewController: UIViewController {
         self.getListData()
         self.setupTableView()
         self.setupRefreshControl()
-   
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
         if !Connectivity.isConnectedToInternet {
-               let refreshAlert = UIAlertController(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", preferredStyle: UIAlertController.Style.alert)
-                          refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-                          }))
-                          present(refreshAlert, animated: true, completion: nil)
-           }
+            self.popupAlert(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", actionTitles: ["OK"], actionStyle: [.default], actions: [nil,{ action in
+                }], vc: self)
+        }
         self.refresh()
         
     }

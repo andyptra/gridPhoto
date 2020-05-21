@@ -25,13 +25,11 @@ class PhotosViewController: UIViewController {
         
         super.viewWillAppear(animated)
         if !Connectivity.isConnectedToInternet {
-                  let refreshAlert = UIAlertController(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", preferredStyle: UIAlertController.Style.alert)
-                             refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-                             }))
-                             present(refreshAlert, animated: true, completion: nil)
-              }
+            self.popupAlert(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", actionTitles: ["OK"], actionStyle: [.default], actions: [nil,{ action in
+                }], vc: self)
+        }
         self.refresh()
-   
+        
     }
 }
 
@@ -72,14 +70,8 @@ extension PhotosViewController {
         self.getListData()
     }
     @objc func tapSelector(sender: CustomTapGestureRecognizer) {
-        
-        let refreshAlert = UIAlertController(title: "Images", message: "\(sender.Message!)", preferredStyle: UIAlertController.Style.alert)
-        
-        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-            
-        }))
-        present(refreshAlert, animated: true, completion: nil)
-        
+        self.popupAlert(title: "Images", message: "\(sender.Message!)", actionTitles: ["OK"], actionStyle: [.default], actions: [nil,{ action in
+            }], vc: self)
     }
 }
 
